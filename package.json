@@ -1,0 +1,35 @@
+{
+    "name": "@ludeschersoftware/utils",
+    "version": "1.0.0",
+    "description": "A sleek, modular utility package",
+    "publishConfig": {
+        "access": "public"
+    },
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "types": "index.ts",
+    "exports": {
+        ".": {
+            "import": "./index.js",
+            "types": "./index.ts"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/ludeschersoftware/JUtils.git"
+    },
+    "keywords": [
+        "utils"
+    ],
+    "author": "Johannes Ludescher",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/ludeschersoftware/JUtils/issues"
+    },
+    "homepage": "https://github.com/ludeschersoftware/JUtils#readme",
+    "dependencies": {
+        "@ludeschersoftware/math": "^1.0.0"
+    }
+}
