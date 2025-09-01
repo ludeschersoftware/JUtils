@@ -1,6 +1,6 @@
 {
     "name": "@ludeschersoftware/utils",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A sleek, modular utility package",
     "publishConfig": {
         "access": "public"
@@ -31,5 +31,8 @@
     "homepage": "https://github.com/ludeschersoftware/JUtils#readme",
     "dependencies": {
         "@ludeschersoftware/math": "^1.0.0"
+    },
+    "devDependencies": {
+        "@ludeschersoftware/types": "^1.1.0"
     }
 }

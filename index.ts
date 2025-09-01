@@ -1,4 +1,5 @@
 import { randomInt } from "@ludeschersoftware/math";
+import { Box } from "@ludeschersoftware/types";
 
 export function CreateUniqHash(length: number): string {
     let hash: string = '';
@@ -7,13 +8,33 @@ export function CreateUniqHash(length: number): string {
         if (i % 4 === 0) {
             hash += String.fromCharCode(randomInt(65, 90)); // A-Z
         } else if (i % 3 === 0) {
-            hash += String.fromCharCode(randomInt(97, 122)); // a-z
-        } else if (i % 2 === 0) {
             hash += String.fromCharCode(randomInt(48, 57)); // 0-9
         } else {
-            hash += '-';
+            hash += String.fromCharCode(randomInt(97, 122)); // a-z
         }
     }
 
     return hash;
+}
+
+export function HashValue(value: string): number {
+    let hash = 0;
+
+    const len = value.length;
+
+    for (let i = 0; i < len; i++) {
+        hash = (hash << 5) - hash + value.charCodeAt(i);
+        hash |= 0; // force 32-bit
+    }
+
+    return hash;
+}
+
+export function EmptyBox(): Box {
+    return {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+    };
 }

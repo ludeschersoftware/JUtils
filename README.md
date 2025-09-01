@@ -1,4 +1,4 @@
-A lightweight utility package for JavaScript and TypeScript — starting with a unique hash generator and ready to grow into your go-to toolbox.
+A lightweight utility package for JavaScript and TypeScript — starting with a unique hash generator and growing into your go-to toolbox.
 
 Built with clarity and modularity in mind, this package is perfect for developers who want clean, reusable functions without the clutter.
 
@@ -6,11 +6,13 @@ Built with clarity and modularity in mind, this package is perfect for developer
 
 ## ✨ Features
 
-- 🔑 `CreateUniqHash(length)` — Generate readable, structured random hashes
-- 🎲 Uses `randomInt` from `@ludeschersoftware/math` for consistent randomness
-- 🧠 Type-safe and framework-agnostic
-- 🪶 Zero dependencies, fully tree-shakable
-- 🧱 Designed for expansion: string utilities, state wrappers, and more
+* 🔑 `CreateUniqHash(length)` — Generate readable, structured random hashes
+* 🌀 `HashValue(value)` — Create a fast, deterministic 32-bit integer hash from strings
+* 📦 `EmptyBox()` — Get a type-safe, initialized `Box` object with zeroed dimensions
+* 🎲 Uses `randomInt` from `@ludeschersoftware/math` for consistent randomness
+* 🧠 Type-safe and framework-agnostic
+* 🪶 Zero dependencies, fully tree-shakable
+* 🧱 Designed for expansion: string utilities, state wrappers, and more
 
 ---
 
@@ -27,10 +29,19 @@ yarn add @ludeschersoftware/utils
 ## 🔧 Usage
 
 ```ts
-import { CreateUniqHash } from '@ludeschersoftware/utils';
+import { CreateUniqHash, HashValue, EmptyBox } from '@ludeschersoftware/utils';
 
+// Unique random hash
 const hash = CreateUniqHash(24);
-console.log(hash); // → e.g., "A-b9C-d8E-Fg7H-Ij6K"
+console.log(hash); // → e.g., "A9cF7gH2kL"
+
+// Deterministic string hash
+const code = HashValue("Hello World");
+console.log(code); // → e.g., 1794106052
+
+// Empty Box object
+const box = EmptyBox();
+console.log(box); // → { x: 0, y: 0, width: 0, height: 0 }
 ```
 
 ---
@@ -41,28 +52,65 @@ console.log(hash); // → e.g., "A-b9C-d8E-Fg7H-Ij6K"
 
 Generates a pseudo-random string of the specified length using a mix of:
 
-- Uppercase letters (A–Z)
-- Lowercase letters (a–z)
-- Digits (0–9)
-- Dashes (`-`) for readability
-
-The character type is chosen based on the index position:
-
-- `i % 4 === 0` → uppercase
-- `i % 3 === 0` → lowercase
-- `i % 2 === 0` → digit
-- otherwise → dash
+* Uppercase letters (`A–Z`) → when `i % 4 === 0`
+* Digits (`0–9`) → when `i % 3 === 0`
+* Lowercase letters (`a–z`) → otherwise
 
 Internally uses `randomInt(min, max)` from `@ludeschersoftware/math` for consistent, inclusive random number generation.
 
----
-
-## 🧪 Example Output
+**Example:**
 
 ```ts
-CreateUniqHash(16); // → "A-b9C-d8E-Fg7H"
-CreateUniqHash(32); // → "A-b9C-d8E-Fg7H-Ij6K-Lm5N"
+CreateUniqHash(12); // → "A9cF7gH2kLz"
+CreateUniqHash(20); // → "A1b2C3d4E5f6G7h8I9"
 ```
+
+---
+
+### `HashValue(value: string): number`
+
+Computes a **deterministic 32-bit integer hash** for a given string.
+
+* Useful for creating stable IDs, cache keys, or simple hash maps.
+* Always returns the same integer for the same string input.
+* Operates quickly with bitwise math.
+
+⚠️ **Note:** This is not cryptographically secure. Do not use for passwords or security-sensitive applications.
+
+**Example:**
+
+```ts
+HashValue("Hello"); // → 69609650
+HashValue("Hello"); // → 69609650 (deterministic)
+HashValue("World"); // → 83766130
+```
+
+---
+
+### `EmptyBox(): Box`
+
+Creates and returns a new `Box` object with **zeroed dimensions**.
+The `Box` type is imported from `@ludeschersoftware/types`.
+
+**Shape of `Box`:**
+
+```ts
+interface Box {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+```
+
+**Example:**
+
+```ts
+const b = EmptyBox();
+// → { x: 0, y: 0, width: 0, height: 0 }
+```
+
+This is useful when you need a default, type-safe bounding box to work with.
 
 ---
 
@@ -70,9 +118,9 @@ CreateUniqHash(32); // → "A-b9C-d8E-Fg7H-Ij6K-Lm5N"
 
 Planned additions include:
 
-- `debounce`, `throttle`, `memoize`
-- String utilities: `slugify`, `camelCase`, `truncate`
-- Object helpers: `deepClone`, `merge`, `omit`
+* `debounce`, `throttle`, `memoize`
+* String utilities: `slugify`, `camelCase`, `truncate`
+* Object helpers: `deepClone`, `merge`, `omit`
 
 ---
 
