@@ -126,18 +126,23 @@ const b = EmptyBox();
 
 ---
 
-### `ResolveAsync<T>(promise: Promise<T>): Result<T, unknown>`
+### `ResolveAsync<T, E = unknown>(promise: Promise<T>): Result<T, E>`
 
 Wraps any promise in a `Result<T, E>` object from `@ludeschersoftware/result`, allowing safe and expressive async handling without try/catch.
 
 * Returns `Result.Ok(data)` if resolved
 * Returns `Result.Err(error)` if rejected
+* You can optionally specify a custom error type `E`
 * Fully type-safe and composable
 
 **Example:**
 
 ```ts
+// Default error type (unknown)
 const result = await ResolveAsync(fetchData());
+
+// Custom error type
+const result = await ResolveAsync<User, FetchError>(fetchUser());
 
 if (result.isOk()) {
   const data = result.unwrap();

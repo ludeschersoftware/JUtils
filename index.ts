@@ -40,11 +40,12 @@ export function EmptyBox(): Box {
     };
 }
 
-export async function ResolveAsync<T>(promise: Promise<T>): Promise<ReturnType<typeof Result.Ok<T>> | ReturnType<typeof Result.Err>> {
+export async function ResolveAsync<T, E = unknown>(
+    promise: Promise<T>
+): Promise<Result<T, E>> {
     try {
-        const data = await promise;
-        return Result.Ok(data);
+        return Result.Ok<T, E>(await promise);
     } catch (error) {
-        return Result.Err(error);
+        return Result.Err<T, E>(error as E);
     }
 }

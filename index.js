@@ -34,8 +34,7 @@ export function EmptyBox() {
 }
 export async function ResolveAsync(promise) {
     try {
-        const data = await promise;
-        return Result.Ok(data);
+        return Result.Ok(await promise);
     }
     catch (error) {
         return Result.Err(error);
