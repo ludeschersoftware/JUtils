@@ -43,9 +43,11 @@ export function EmptyBox(): Box {
 export async function ResolveAsync<T, E = unknown>(
     promise: Promise<T>
 ): Promise<Result<T, E>> {
-    try {
-        return Result.Ok<T, E>(await promise);
-    } catch (error) {
-        return Result.Err<T, E>(error as E);
-    }
-}
+    return promise
+        .then((data) => {
+            return Result.Ok<T, E>(data);
+        })
+        .catch((error) => {
+            return Result.Err<T, E>(error as E);
+        });
+};

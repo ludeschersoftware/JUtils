@@ -33,11 +33,13 @@ export function EmptyBox() {
     };
 }
 export async function ResolveAsync(promise) {
-    try {
-        return Result.Ok(await promise);
-    }
-    catch (error) {
+    return promise
+        .then((data) => {
+        return Result.Ok(data);
+    })
+        .catch((error) => {
         return Result.Err(error);
-    }
+    });
 }
+;
 //# sourceMappingURL=index.js.map
