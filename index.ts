@@ -1,4 +1,5 @@
 import { randomInt } from "@ludeschersoftware/math";
+import Result from "@ludeschersoftware/result";
 import { Box } from "@ludeschersoftware/types";
 
 export function CreateUniqHash(length: number): string {
@@ -37,4 +38,13 @@ export function EmptyBox(): Box {
         width: 0,
         height: 0,
     };
+}
+
+export async function ResolveAsync<T>(promise: Promise<T>): Promise<ReturnType<typeof Result.Ok<T>> | ReturnType<typeof Result.Err>> {
+    try {
+        const data = await promise;
+        return Result.Ok(data);
+    } catch (error) {
+        return Result.Err(error);
+    }
 }

@@ -9,6 +9,7 @@ Built with clarity and modularity in mind, this package is perfect for developer
 * 🔑 `CreateUniqHash(length)` — Generate readable, structured random hashes
 * 🌀 `HashValue(value)` — Create a fast, deterministic 32-bit integer hash from strings
 * 📦 `EmptyBox()` — Get a type-safe, initialized `Box` object with zeroed dimensions
+* 🔁 `ResolveAsync(promise)` — Wrap any promise in a `Result<T, E>` for safe async handling
 * 🎲 Uses `randomInt` from `@ludeschersoftware/math` for consistent randomness
 * 🧠 Type-safe and framework-agnostic
 * 🪶 Zero dependencies, fully tree-shakable
@@ -29,7 +30,12 @@ yarn add @ludeschersoftware/utils
 ## 🔧 Usage
 
 ```ts
-import { CreateUniqHash, HashValue, EmptyBox } from '@ludeschersoftware/utils';
+import {
+  CreateUniqHash,
+  HashValue,
+  EmptyBox,
+  ResolveAsync
+} from '@ludeschersoftware/utils';
 
 // Unique random hash
 const hash = CreateUniqHash(24);
@@ -42,6 +48,14 @@ console.log(code); // → e.g., 1794106052
 // Empty Box object
 const box = EmptyBox();
 console.log(box); // → { x: 0, y: 0, width: 0, height: 0 }
+
+// Safe async resolution
+const result = await ResolveAsync(fetchUser());
+if (result.isOk()) {
+  console.log("User:", result.unwrap());
+} else {
+  console.error("Error:", result.unwrapErr());
+}
 ```
 
 ---
@@ -110,7 +124,28 @@ const b = EmptyBox();
 // → { x: 0, y: 0, width: 0, height: 0 }
 ```
 
-This is useful when you need a default, type-safe bounding box to work with.
+---
+
+### `ResolveAsync<T>(promise: Promise<T>): Result<T, unknown>`
+
+Wraps any promise in a `Result<T, E>` object from `@ludeschersoftware/result`, allowing safe and expressive async handling without try/catch.
+
+* Returns `Result.Ok(data)` if resolved
+* Returns `Result.Err(error)` if rejected
+* Fully type-safe and composable
+
+**Example:**
+
+```ts
+const result = await ResolveAsync(fetchData());
+
+if (result.isOk()) {
+  const data = result.unwrap();
+  console.log("Success:", data);
+} else {
+  console.error("Failure:", result.unwrapErr());
+}
+```
 
 ---
 
@@ -121,6 +156,7 @@ Planned additions include:
 * `debounce`, `throttle`, `memoize`
 * String utilities: `slugify`, `camelCase`, `truncate`
 * Object helpers: `deepClone`, `merge`, `omit`
+* Geometry: `intersects(boxA, boxB)`, `expandBox(box, padding)`
 
 ---
 

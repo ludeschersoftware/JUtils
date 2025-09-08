@@ -1,4 +1,5 @@
 import { randomInt } from "@ludeschersoftware/math";
+import Result from "@ludeschersoftware/result";
 export function CreateUniqHash(length) {
     let hash = '';
     for (let i = 0; i < length; i++) {
@@ -30,5 +31,14 @@ export function EmptyBox() {
         width: 0,
         height: 0,
     };
+}
+export async function ResolveAsync(promise) {
+    try {
+        const data = await promise;
+        return Result.Ok(data);
+    }
+    catch (error) {
+        return Result.Err(error);
+    }
 }
 //# sourceMappingURL=index.js.map

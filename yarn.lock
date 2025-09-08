@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@ludeschersoftware/math/-/math-1.0.0.tgz#8585b7c291b2af04b02f272e1f43d091784465ea"
   integrity sha512-iYXy+LGHhJTD6xT9LUUejFocujD2k2pwT1VM9C60nfxSkcZbg2GefhmZHSRDpEGQlRfyDV3exLXSvFN/37f4BA==
 
+"@ludeschersoftware/result@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@ludeschersoftware/result/-/result-1.0.0.tgz#0b2ca78c891790b60d227d4a5ab17ef037b75473"
+  integrity sha512-Ffq4oHl0dlBC6R1QCwBeC/2nFKJa66n96zq8clz5M0avuGzv8AXd7LVUbs2zFKHEgwHr/MKKuT63+yPLGrj2Kw==
+
 "@ludeschersoftware/types@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@ludeschersoftware/types/-/types-1.1.0.tgz#ddd79b9b00548675f3ce3c7afcd6d548c11f8ea9"
