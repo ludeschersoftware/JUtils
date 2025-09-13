@@ -42,4 +42,7 @@ export async function ResolveAsync(promise) {
     });
 }
 ;
+export async function Sleep(delayMs = 300) {
+    await new Promise(resolve => setTimeout(resolve, delayMs));
+}
 //# sourceMappingURL=index.js.map

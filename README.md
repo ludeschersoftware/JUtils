@@ -10,6 +10,7 @@ Built with clarity and modularity in mind, this package is perfect for developer
 * 🌀 `HashValue(value)` — Create a fast, deterministic 32-bit integer hash from strings
 * 📦 `EmptyBox()` — Get a type-safe, initialized `Box` object with zeroed dimensions
 * 🔁 `ResolveAsync(promise)` — Wrap any promise in a `Result<T, E>` for safe async handling
+* ⏱️ `Sleep(delayMs)` — Pause execution for a given number of milliseconds
 * 🎲 Uses `randomInt` from `@ludeschersoftware/math` for consistent randomness
 * 🧠 Type-safe and framework-agnostic
 * 🪶 Zero dependencies, fully tree-shakable
@@ -34,7 +35,8 @@ import {
   CreateUniqHash,
   HashValue,
   EmptyBox,
-  ResolveAsync
+  ResolveAsync,
+  Sleep
 } from '@ludeschersoftware/utils';
 
 // Unique random hash
@@ -56,6 +58,10 @@ if (result.isOk()) {
 } else {
   console.error("Error:", result.unwrapErr());
 }
+
+// Sleep for 500ms
+await Sleep(500);
+console.log("Woke up after 500ms");
 ```
 
 ---
@@ -150,6 +156,23 @@ if (result.isOk()) {
 } else {
   console.error("Failure:", result.unwrapErr());
 }
+```
+
+---
+
+### `Sleep(delayMs: number = 300): Promise<void>`
+
+Pauses execution for the specified number of milliseconds.
+
+* Useful for throttling, testing, or simulating delays
+* Defaults to 300ms if no value is provided
+* Returns a promise that resolves after the delay
+
+**Example:**
+
+```ts
+await Sleep();       // Waits 300ms
+await Sleep(1000);   // Waits 1 second
 ```
 
 ---

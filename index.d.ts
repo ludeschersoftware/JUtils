@@ -4,4 +4,5 @@ export declare function CreateUniqHash(length: number): string;
 export declare function HashValue(value: string): number;
 export declare function EmptyBox(): Box;
 export declare function ResolveAsync<T, E = unknown>(promise: Promise<T>): Promise<Result<T, E>>;
+export declare function Sleep(delayMs?: number): Promise<void>;
 //# sourceMappingURL=index.d.ts.map

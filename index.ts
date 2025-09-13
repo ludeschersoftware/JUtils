@@ -51,3 +51,7 @@ export async function ResolveAsync<T, E = unknown>(
             return Result.Err<T, E>(error as E);
         });
 };
+
+export async function Sleep(delayMs: number = 300): Promise<void> {
+    await new Promise(resolve => setTimeout(resolve, delayMs));
+}
